@@ -1,0 +1,22 @@
+html,
+body {
+    background-image: url('/semLetras.jpg');
+    background-size: cover;
+    background-repeat: repeat;
+    height: 100%;
+    font-family: 'Numans', sans-serif;
+    background-color: lightgrey;
+}
+
+.card-1 {
+    position: absolute;
+    left: 1%;
+}
+
+.naveg {
+    background-color: rgba(31, 148, 76, 0.863);
+}
+
+.textTp {
+    font-weight: bold;
+}

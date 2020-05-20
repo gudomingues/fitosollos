@@ -1,0 +1,30 @@
+html,
+body {
+    background-size: cover;
+    background-repeat: repeat;
+    height: 100%;
+    font-family: 'Numans', sans-serif;
+    background-color: lightgrey;
+}
+
+.posit {
+    position: absolute;
+    left: 50%;
+}
+
+.naveg {
+    background-color: rgba(31, 148, 76, 0.863);
+}
+
+.textTp {
+    font-weight: bold;
+}
+
+.divTp {
+    position: absolute;
+    left: 20%;
+    top: 15%;
+    width: 60%;
+    height: 50%;
+    background-color: rgb(255, 255, 255);
+}
