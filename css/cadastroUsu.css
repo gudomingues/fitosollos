@@ -1,6 +1,6 @@
 html,
 body {
-    background-image: url('semLetras.jpg');
+    background-image: url('../imagens/semLetras.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     height: 100%;
@@ -11,17 +11,6 @@ body {
 .naveg {
     background-color: rgba(43, 197, 94, 0.767);
     float: none;
-}
-
-.Sair {
-    float: right;
-}
-
-.botao {
-    background-image: url("amostras.png");
-    height: 30%;
-    width: 49%;
-    border-bottom: white;
 }
 
 .textTp {
@@ -35,4 +24,9 @@ body {
     width: 80%;
     height: 60%;
     background-color: rgba(18, 19, 19, 0.877)
+}
+
+.posit {
+    position: absolute;
+    top: 15%;
 }

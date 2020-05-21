@@ -8,7 +8,7 @@
 
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link rel="stylesheet" href="loginIndex.css" type="text/css">
+    <link rel="stylesheet" href="css/loginIndex.css" type="text/css">
     <title>Login</title>
 </head>
 
@@ -19,7 +19,7 @@
         <div class="d-flex justify-content-center h-100">
             <div class="card">
                 <div class="card-header p-2 d-flex justify-content-center">
-                    <img src="fitos.png" width=100% height=100%>
+                    <img src="../imagens/fitos.png" width=100% height=100%>
                 </div>
                 <div class="card-body">
                     <form action="login.php" method="POST">
@@ -27,7 +27,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fas fa-user"></i></span>
                             </div>
-                            <input type="text" class="form-control" placeholder="Usuário" name="usuario">
+                            <input type="text" class="form-control" placeholder="Email" name="usuario">
 
                         </div>
                         <div class="input-group form-group d-flex justify-content-center">

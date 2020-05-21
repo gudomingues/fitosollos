@@ -10,7 +10,8 @@ session_start();
 $usuario = mysqli_real_escape_string($conexao,$_POST['usuario']);
 $senha = mysqli_real_escape_string($conexao,$_POST['senha']);
 
-$query = "select CAD_USU, CAD_SENHA FROM cadastro WHERE CAD_USU = '{$usuario}' and CAD_SENHA = '{$senha}'";
+
+$query = "select USR_EMAIL, USR_SENHA FROM usuario WHERE USR_EMAIL = '{$usuario}' and USR_SENHA = '{$senha}'";
 
 
 $result = mysqli_query($conexao, $query);

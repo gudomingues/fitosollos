@@ -1,6 +1,6 @@
 html,
 body {
-    background-image: url('/semLetras.jpg');
+    background-image: url('../imagens/semLetras.jpg');
     background-size: cover;
     background-repeat: repeat;
     height: 100%;
@@ -24,7 +24,7 @@ body {
 .divTp {
     position: relative;
     left: 20%;
-    top: 15%;
+    top: 10%;
     width: 60%;
     height: 90%;
     background-color: rgb(255, 255, 255);

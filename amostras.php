@@ -11,18 +11,69 @@
 </head>
 
 <body>
-    <?php include('verificarLogin.php'); ?>
+    <?php include('verificarLogin.php'); 
+      $cultura = $_SESSION["cultura"];
+
+?>
+    <?php
+    
+
+
+    $tipo = $propri = $resp =  "";
+
+    if (!empty($_POST["tipo"])) {
+        $tipo = $_POST["tipo"];
+        $propri = $_POST["propri"];
+        $resp = $_POST["resp"];
+        $cultura =$_POST["cultura"];
+    }
+    if (!empty($tipo)) {
+        require_once ("configuracao.php");
+
+        $sql = "SELECT tipo_analise.TAN_DESCRICAO, proprietario.PRI_NOME, responsavel_tecnico.RES_NOME FROM tipo_analise, proprietario, responsavel_tecnico
+        where (tipo_analise.TAN_ID = ?) and ( proprietario.PRI_CNPJ_CPF = ?) and (responsavel_tecnico.RES_NOME =?); "; 
+
+$_SESSION['frase'] = $tipo;
+
+        $comando = mysqli_prepare($conexao, $sql);
+        mysqli_stmt_bind_param($comando, "iss", $tipo,$propri,$resp);
+
+        mysqli_stmt_execute($comando);
+
+        $resultado = mysqli_stmt_get_result($comando);
+
+
+    
+        
+            $linha = mysqli_fetch_array($resultado);
+
+             $tipo = $linha["TAN_DESCRICAO"];
+            $propri = $linha["PRI_NOME"];
+             $resp =  $linha["RES_NOME"];
+            
+        
+        
+        mysqli_free_result($resultado);
+        mysqli_close($conexao);
+        mysqli_stmt_close($comando);
+    }
+    ?>
+
+
+
+
+
 
 
     <nav class="navbar navbar-expand-lg   naveg static-top mb-5 shadow ">
-        <a class="navbar-header" href="painel.php"> <img src="fitos.png" width="150" height="50"></a>
+        <a class="navbar-header" href="painel.php"> <img src="../imagens/fitos.png" width="150" height="50"></a>
         <!--logo-->
 
         <div class="d-flex flex-row-reverse navbar-collapse " id="navbarText">
             <ul class="nav navbar-nav navbar-right" style="color:cornsilk">
 
                 <li class="nav-item active">
-                    <a class="nav-link text-light textTp" href="painel.php">Voltar<span class="sr-only">(current)</span></a>
+                    <a class="nav-link text-light textTp" href="cad_amoDados.php">Voltar<span class="sr-only">(current)</span></a>
                 </li>
             </ul>
         </div>
@@ -33,34 +84,27 @@
             <div class="form-group row ">
                 <label for="example-email-input" class="col-1 col-form-label">Tipo da Analise</label>
                 <div class="col-10">
-                    <input class="form-control" type="text" value="" id="example-email-input" readonly>
-                </div>
-
-            </div>
-            <div class="form-group row ">
-                <label for="example-email-input" class="col-1 col-form-label">Laboratorio</label>
-                <div class="col-10">
-                    <input class="form-control" type="text" value="" id="example-email-input" readonly>
+                    <input class="form-control" type="text" value="<?php echo $tipo ?>" id="example-email-input" readonly>
                 </div>
 
             </div>
             <div class="form-group row ">
                 <label for="example-email-input" class=" col-1 col-form-label">Proprietario</label>
                 <div class="col-10">
-                    <input class="form-control" type="text" value="" id="example-email-input" readonly>
+                    <input class="form-control" type="text" value="<?php echo $propri ?>" id="example-email-input" readonly>
                 </div>
             </div>
             <div class="form-row  ">
                 <div class="form-group row col-6">
                     <label for="example-email-input" class=" col-3 col-form-label">Cultura</label>
                     <div class="col-8">
-                        <input class="form-control" type="text" value="" id="example-email-input" readonly>
+                        <input class="form-control" type="text" value="<?php  echo $cultura?>" id="example-email-input" readonly name="cultura">
                     </div>
                 </div>
                 <div class="form-group row col-6 ">
                     <label for="example-email-input" class=" col-3 col-form-label">Usuario</label>
                     <div class="col-8">
-                        <input class="form-control" type="text" value="" id="example-email-input" readonly>
+                        <input class="form-control" type="text" value=" <?php echo $_SESSION['usuario']; ?>" id="example-email-input" readonly>
                     </div>
                 </div>
             </div>
@@ -68,15 +112,10 @@
                 <div class="form-group row col-6 ">
                     <label for="example-email-input" class=" col-3 col-form-label">Responsavel Tecnico</label>
                     <div class="col-8">
-                        <input class="form-control" type="text" value="" id="example-email-input" readonly>
+                        <input class="form-control" type="text" value=" <?php echo $resp ?>" id="example-email-input" readonly>
                     </div>
                 </div>
-                <div class="form-group row col-6 ">
-                    <label for="example-email-input" class=" col-3 col-form-label">Metodo</label>
-                    <div class="col-8">
-                        <input class="form-control" type="text" value="" id="example-email-input" readonly>
-                    </div>
-                </div>
+                
             </div>
             <div class="form-row  ">
                 <div class="form-group row col-6 ">
@@ -96,106 +135,30 @@
                 <div class="form-group row col-6">
                     <label for="example-email-input" class=" col-3 col-form-label">Amostra Finalizada</label>
                     <div class="col-8">
-                        <input class="form-control" type="text" value="" id="example-email-input" readonly>
+                        <input class="form-control" type="text" value="" id="example-email-input" >
                     </div>
                 </div>
                 <div class="form-group row col-6 ">
                     <label for="example-email-input" class=" col-3 col-form-label">Amostra Cancelada</label>
                     <div class="col-8">
-                        <input class="form-control" type="text" value="" id="example-email-input" readonly>
+                        <input class="form-control" type="text" value="" id="example-email-input" >
                     </div>
                 </div>
             </div>
-        </div>
-
-        <table class="table table-lg ">
-            <thead class="thead-dark">
-                <tr>
-                    <th scope="col">AMOSTRA</th>
-                   
-                    <th scope="col">Pratylenchus </th>
-                    <th scope="col">Meloidogyne </th>
-                    <th scope="col">Helicotylenchus</th>
-                    <th scope="col">Rotylenchulus </th>
-                    <th scope="col">Ovos</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <th scope="row ">
-                        <div class="form-row ">
-                            <div class="form-group col-md-12">
-                                <input type="text" class="form-control" id="Atual" placeholder="AM 1  ">
-                            </div>
-                        </div>
-                    </th>
-                  
-                    </td>
-
-                    <td>
-                        <div class="form-row ">
-                            <div class="form-group col-md-6">
-                                <input type="text" class="form-control" id="Atual" placeholder="Raiz">
-                            </div>
-                            <div class="form-group col-md-6">
-                                <input type="text" class="form-control" id="Futura" placeholder="Solo">
-                            </div>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="form-row ">
-                            <div class="form-group col-md-6">
-                                <input type="text" class="form-control" id="Atual" placeholder="Raiz">
-                            </div>
-                            <div class="form-group col-md-6">
-                                <input type="text" class="form-control" id="Futura" placeholder="Solo">
-                            </div>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="form-row ">
-                            <div class="form-group col-md-6">
-                                <input type="text" class="form-control" id="Atual" placeholder="Raiz">
-                            </div>
-                            <div class="form-group col-md-6">
-                                <input type="text" class="form-control" id="Futura" placeholder="Solo">
-                            </div>
-                        </div>
-                    <td>
-                        <div class="form-row ">
-                            <div class="form-group col-md-6">
-                                <input type="text" class="form-control" id="Atual" placeholder="Raiz">
-                            </div>
-                            <div class="form-group col-md-6">
-                                <input type="text" class="form-control" id="Futura" placeholder="Solo">
-                            </div>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="form-row ">
-                            <div class="form-group col-md-12">
-                                <input type="text" class="form-control" id="Atual" placeholder="Raiz">
-                            </div>
-
-                        </div>
-                    </td>
-
-                </tr>
-               
-
-            </tbody>
-        </table>
-        <div class="input-group flex-nowrap">
-            <div class="input-group-prepend">
-                <span class="input-group-text" id="addon-wrapping">Referencias</span>
+            <div class="form-row  ">
+                <div class="form-group row col-6">
+                    <label for="example-email-input" class=" col-3 col-form-label">Descrição</label>
+                    <div class="col-8">
+                        <input class="form-control" type="text" value="" id="example-email-input">
+                    </div>
+                </div>
+                <div class="form-group row col-6 ">
+                    <label for="example-email-input" class=" col-3 col-form-label">Peso</label>
+                    <div class="col-4">
+                        <input class="form-control" type="text" value="" id="example-email-input" >
+                    </div>
+                </div>
             </div>
-            <input type="text" class="form-control" placeholder=" Nematoides recuperados em 100 cm³ de solo e 10 g de raízes" aria-label="Username" aria-describedby="addon-wrapping">
-        </div>
-        <div class="input-group flex-nowrap">
-            <div class="input-group-prepend">
-                <span class="input-group-text" id="addon-wrapping">Especie Predominante</span>
-            </div>
-            <input type="text" class="form-control" placeholder=" " aria-label="Username" aria-describedby="addon-wrapping">
         </div>
         <div class="d-flex justify-content-center p-5">
             <input class="btn btn-success" type="submit" value="Enviar Ficha">

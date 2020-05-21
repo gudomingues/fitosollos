@@ -1,6 +1,6 @@
 html,
 body {
-    background-image: url('/semLetras.jpg');
+    background-image: url('../imagens/semLetras.jpg');
     background-size: cover;
     background-repeat: repeat;
     height: 100%;

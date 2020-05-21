@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-
+    <link rel="stylesheet" href="css/cadastroUsu.css" type="text/css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
     <title>Cadastro</title>
@@ -32,45 +32,59 @@
         }
         if (!empty($usuario) && !empty($email) && !empty($senha)) {
 
-            require_once("configuracao.php");
+            require_once ("configuracao.php");
 
-            $sql = "insert into cadastro (CAD_USU,CAD_SENHA, CAD_EMAIL) values (? ,? ,? )";
+            $sql = "insert into usuario (USR_NOME, USR_SENHA, USR_EMAIL) values (? ,? ,? )";
 
             $comando = mysqli_prepare($conexao, $sql);
 
             mysqli_stmt_bind_param($comando, "sss", $usuario, $senha, $email);
 
             mysqli_stmt_execute($comando);
+            
+            if(mysqli_affected_rows($conexao) != 0){
+                echo "<script language='javascript' type='text/javascript'>
+                alert('Usuário cadastrado com sucesso!');window.location.
+                href='Painel.php'</script>";
+                   
+            }
 
             mysqli_stmt_close($comando);
             mysqli_close($conexao);
-            echo "<script language='javascript' type='text/javascript'>
-          alert('Usuário cadastrado com sucesso!');window.location.
-          href='loginIndex.php'</script>";
+            
         }
     }
 
     ?>
 
+    <!-- Custom nvbar color -->
+    <nav class="navbar navbar-expand-lg  fixed-top static-top mb-5 shadow naveg ">
+        <a class="navbar-header" href="painel.php">
+            <img src="../imagens/fitos.png" width="150" height="50"></a>
+        <!--logo-->
 
+        <div class="d-flex flex-row-reverse navbar-collapse p-2" id="navbarText">
+            <ul class="nav navbar-nav navbar-right" style="color:cornsilk">
 
-    <form action="cadastro.php" method="POST">
+                <li class="nav-item active">
+                    <a class="nav-link textTp text-light" href="painel.php">Voltar<span class="sr-only">(current)</span></a>
+                </li>
+            </ul>
+        </div>
+    </nav>
 
-        <nav class="navbar navbar-dark bg-dark">
-            <a class="navbar-brand " href="janelasFit.php">FITO SOLLOS - Cadastrar Novo Usuario</a>
-        </nav>
+    <form action="cadastro.php" method="POST" class="d-flex justify-content-center">
 
-        <div class="col-sm-10  ">
-            <div class="card col-sm-10 offset-md-2  ">
-                <div class="card-body ">
-
-                    <div class="form-group row">
-                        <label for="usuario" class="col-3 col-form-label">Insira seu Login </label>
-                        <div class="col-10">
-                            <input class="form-control" type="text" id="usuario" name="usuario" value="<?php echo $usuario ?>">
-                            <p class="text-danger"> <?php echo $erroA ?></p>
-                        </div>
+        <div class="card col-6" style=" top:100px">
+            <h5 class="card-header">Cadastrar Novo Usuário</h5>
+            <div class="card-body">
+                <div class="form-group row">
+                    <label for="usuario" class="col-3 col-form-label">Insira seu Login </label>
+                    <div class="col-10">
+                        <input class="form-control" type="text" id="usuario" name="usuario" value="<?php echo $usuario ?>">
+                        <p class="text-danger"> <?php echo $erroA ?></p>
                     </div>
+                </div>
                     <div class="form-group row">
                         <label for="email" class="col-3 col-form-label">Insira seu Email </label>
                         <div class="col-10">
@@ -85,9 +99,16 @@
                             <p class="text-danger"> <?php echo $erroC ?></p>
                         </div>
                     </div>
+               
 
-                    <button type="submit" class="btn btn-success btn-lg  ">Cadastrar</button>
-                    <a class="btn btn-danger btn-lg" href="painel.php" role="button">Cancelar</a>
+                <button type="submit" class="btn btn-success btn-lg  ">Cadastrar</button>
+                <a class="btn btn-danger btn-lg" href="painel.php" role="button">Cancelar</a>
+            </div>
+
+
+        </div>
+
+
     </form>
 
 

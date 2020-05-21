@@ -15,7 +15,7 @@
 
 
     <nav class="navbar navbar-expand-lg   naveg static-top mb-5 shadow ">
-        <a class="navbar-header" href="painel.php"> <img src="fitos.png" width="150" height="50"></a>
+        <a class="navbar-header" href="painel.php"> <img src="../imagens/fitos.png" width="150" height="50"></a>
         <!--logo-->
 
         <div class="d-flex flex-row-reverse navbar-collapse " id="navbarText">
