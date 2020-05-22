@@ -1,8 +1,8 @@
 html,
 body {
-    background-color: ivory;
+    background-image: url('../imagens/semLetras.jpg');
     background-size: cover;
-    background-repeat: repeat;
+    background-repeat: no-repeat;
     height: 100%;
     font-family: 'Numans', sans-serif;
     background-color: lightgrey;
@@ -27,7 +27,7 @@ body {
     top: 15%;
     width: 60%;
     height: 50%;
-    background-color: rgb(255, 255, 255);
+    background-color: rgb(145, 141, 141);
 }
 
 .invi {
@@ -37,4 +37,11 @@ body {
     padding: 0;
     margin: 0;
     float: right;
+}
+
+.cust {
+    position: relative;
+    top: 100px;
+    padding: 100px;
+    background-color: rgba(103, 103, 110, 0.719);
 }

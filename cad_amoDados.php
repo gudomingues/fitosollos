@@ -28,36 +28,7 @@
         $resp = $_POST["resp"];
         $cultura =$_POST["cultura"];
     }
-    if (!empty($tipo)) {
-        require_once ("configuracao.php");
-
-        $sql = "SELECT tipo_analise.TAN_DESCRICAO, proprietario.PRI_NOME, responsavel_tecnico.RES_NOME FROM tipo_analise, proprietario, responsavel_tecnico
-        where (tipo_analise.TAN_ID = ?) and ( proprietario.PRI_CNPJ_CPF = ?) and (responsavel_tecnico.RES_NOME =?); "; 
-
-$_SESSION['frase'] = $tipo;
-
-        $comando = mysqli_prepare($conexao, $sql);
-        mysqli_stmt_bind_param($comando, "iss", $tipo,$propri,$resp);
-
-        mysqli_stmt_execute($comando);
-
-        $resultado = mysqli_stmt_get_result($comando);
-
-
     
-        
-            $linha = mysqli_fetch_array($resultado);
-
-             $tipo = $linha["TAN_DESCRICAO"];
-            $propri = $linha["PRI_NOME"];
-             $resp =  $linha["RES_NOME"];
-            
-        
-        
-        mysqli_free_result($resultado);
-        mysqli_close($conexao);
-        mysqli_stmt_close($comando);
-    }
    
     ?>
 
@@ -77,7 +48,7 @@ $_SESSION['frase'] = $tipo;
             </ul>
         </div>
     </nav>
-
+    <input class="form-control" type="text" id="email" name="tipo" value="<?php echo $tipo?>">
     <form action="amostras.php" method="POST" class="p-5">
     <div class="p-3" >
         <div class="col-sm-10 p-3" style=" left: 1%">
@@ -114,6 +85,7 @@ $_SESSION['frase'] = $tipo;
                     </div>
 
                 </div>
+               
                 <div class="mx-auto">
                    <button type="submit" class="btn btn-success btn-lg  ">Proximo</button>
                    </div>

@@ -63,7 +63,6 @@
             mysqli_stmt_bind_param($comando, "sssssssss", $nome, $cnpj, $ddd, $telefone, $cidade, $uf, $endereco, $bairro, $cep);
 
             mysqli_stmt_execute($comando);
-
             if (mysqli_affected_rows($conexao) != 0) {
                 echo "<script language='javascript' type='text/javascript'>
                 alert('Proprietario cadastrado com sucesso!');window.location.
@@ -71,7 +70,6 @@
             }
 
             mysqli_stmt_close($comando);
-
             mysqli_close($conexao);
         }
     }

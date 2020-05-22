@@ -14,64 +14,52 @@
     <?php include('verificarLogin.php'); ?>
     <?php
 
-    $nome = $cnpj = $ddd = $telefone = $cidade = $uf = $endereco = $bairro = $cep = $erroA = $erroB = $erroC = $erroD = $erroE = $erroF = $erroG = '';
+    $raizA = $raizB = $raizC = $raizD = $soloA = $soloB = $soloC = $soloD = $nema = $amostra = $erroA = $erroB = $contaR = $contaS = $ovos ="";
+
+
+
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        if (empty($_POST["nome"])) {
+        if (empty($_POST["nema"])) {
             $erroA = "O campo acima é obrigatorio!";
         } else {
-            $nome = $_POST["nome"];
+            $nema = $_POST["nema"];
         }
-        if (empty($_POST["cnpj"])) {
+        if (empty($_POST["amostra"])) {
             $erroB = "O campo acima é obrigatorio!";
         } else {
-            $cnpj = $_POST["cnpj"];
+            $amostra = $_POST["amostra"];
         }
-        if (empty($_POST["ddd"])) {
-            $erroC = "O campo acima é obrigatorio!";
-        } else {
-            $ddd = $_POST["ddd"];
-        }
-        if (empty($_POST["telefone"])) {
-            $erroD = "O campo acima é obrigatorio!";
-        } else {
-            $telefone = $_POST["telefone"];
-        }
-        if (empty($_POST["cidade"])) {
-            $erroE = "O campo acima é obrigatorio!";
-        } else {
-            $cidade = $_POST["cidade"];
-        }
-
-        if (empty($_POST["endereco"])) {
-            $erroG = "O campo acima é obrigatorio!";
-        } else {
-            $endereco = $_POST["endereco"];
-            $uf = $_POST["uf"];
-            $bairro = $_POST["bairro"];
-            $cep = $_POST["cep"];
-        }
-        if (!empty($nome) && !empty($cnpj) && !empty($ddd) && !empty($telefone) && !empty($cnpj)) {
-
-           
+        if (!empty($_POST["nema"]) && !empty($_POST["amostra"])) {
+            $ovos = $_POST["ovos"];
+            $raizA = $_POST["raizA"];
+            $raizB = $_POST["raizB"];
+            $raizC = $_POST["raizC"];
+            $raizD = $_POST["raizD"];
+            $soloA = $_POST["soloA"];
+            $soloB = $_POST["soloB"];
+            $soloC = $_POST["soloC"];
+            $soloD = $_POST["soloD"];
+            $contaR = $raizA + $raizB + $raizC + $raizD;
+            $contaS = $soloA +$soloB +$soloC +$soloD;
+            echo " $ovos $raizD $amostra $nema";
+            
             require_once("configuracao.php");
 
-            $sql = "insert into proprietario (PRI_NOME, PRI_CNPJ_CPF, RES_DDD, RES_TELEFONE, RES_CIDADE, RES_UF, RES_ENDERECO, RES_BAIRRO, RES_CEP) values (? ,? ,? ,? ,? ,? ,? ,? ,? )";
+            $sql = "insert into resultado_analise (RES_ANA_NEM_ID, REC_ANA_AMO_ID, RES_QTD_SOLO, RES_QTD_RAIZ, RES_QTD_OVOS) values (? ,? ,? ,? ,? )";
 
             $comando = mysqli_prepare($conexao, $sql);
 
-            mysqli_stmt_bind_param($comando, "sssssssss", $nome, $cnpj, $ddd, $telefone, $cidade, $uf, $endereco, $bairro, $cep);
+            mysqli_stmt_bind_param($comando, "iiddd", $nema,$amostra,$contaS,$contaR,$ovos);
 
             mysqli_stmt_execute($comando);
 
             if (mysqli_affected_rows($conexao) != 0) {
                 echo "<script language='javascript' type='text/javascript'>
                 alert('Proprietario cadastrado com sucesso!');window.location.
-                href='Painel.php'</script>";
+                href='Painel.php'</script>"; 
             }
-
             mysqli_stmt_close($comando);
-
             mysqli_close($conexao);
         }
     }
@@ -91,7 +79,7 @@
         </div>
     </nav>
 
-    <form action="proprietario.php" method="POST">
+    <form action="analise.php" method="POST">
 
         <div class="col-sm-10 card-1  ">
             <div class="card col-sm-10 offset-md-2  ">
@@ -101,77 +89,84 @@
                         <h5 class="card-header">Dados para Analise</h5>
 
                         <table class="table table-lg ">
-            <thead class="thead-dark">
-                <tr>
-                    <th scope="col">AMOSTRA</th>
-                    <th scope="col">Pratylenchus </th>
-                    <th scope="col">Meloidogyne </th>
-                    <th scope="col">Helicotylenchus</th>
-                    <th scope="col">Rotylenchulus </th>
-                    <th scope="col">Ovos</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <th scope="row ">
-                        <div class="form-row ">
-                            <div class="form-group col-md-12">
-                                <input type="text" class="form-control" id="Atual" placeholder="AM ID  ">
-                            </div>
-                        </div>
-</th>
-                    <td>
-                        <div class="form-row ">
-                            <div class="form-group col-md-6">
-                                <input type="text" class="form-control" id="Atual" placeholder="Raiz">
-                            </div>
-                            <div class="form-group col-md-6">
-                                <input type="text" class="form-control" id="Futura" placeholder="Solo">
-                            </div>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="form-row ">
-                            <div class="form-group col-md-6">
-                                <input type="text" class="form-control" id="Atual" placeholder="Raiz">
-                            </div>
-                            <div class="form-group col-md-6">
-                                <input type="text" class="form-control" id="Futura" placeholder="Solo">
-                            </div>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="form-row ">
-                            <div class="form-group col-md-6">
-                                <input type="text" class="form-control" id="Atual" placeholder="Raiz">
-                            </div>
-                            <div class="form-group col-md-6">
-                                <input type="text" class="form-control" id="Futura" placeholder="Solo">
-                            </div>
-                        </div>
-                    <td>
-                        <div class="form-row ">
-                            <div class="form-group col-md-6">
-                                <input type="text" class="form-control" id="Atual" placeholder="Raiz">
-                            </div>
-                            <div class="form-group col-md-6">
-                                <input type="text" class="form-control" id="Futura" placeholder="Solo">
-                            </div>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="form-row ">
-                            <div class="form-group col-md-12">
-                                <input type="text" class="form-control" id="Atual" placeholder="Raiz">
-                            </div>
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col">AMOSTRA</th>
+                                    <th scope="col">Pratylenchus </th>
+                                    <th scope="col">Meloidogyne </th>
+                                    <th scope="col">Helicotylenchus</th>
+                                    <th scope="col">Rotylenchulus </th>
+                                    <th scope="col">Ovos</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row ">
+                                        <div class="form-row ">
+                                            <div class="form-group col-md-12">
+                                                <input type="text" class="form-control" id="Atual" placeholder="AM ID" name="amostra"value="<?php $amostra ?>">
+                                            </div>
+                                        </div>
+                                        <div class="form-row ">
+                                            <div class="form-group col-md-12">
+                                                <input type="text" class="form-control" id="Atual" placeholder="Nematoide" name="nema" value="<?php $nema ?>" >
+                                            </div>
 
-                        </div>
-                    </td>
+                                        </div>
+                                    </th>
+                                    <td>
+                                        <div class="form-row ">
+                                            <div class="form-group col-md-6">
+                                                <input type="text" class="form-control" id="Atual" placeholder="Raiz" name="raizA" value="<?php $raizA ?>">
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <input type="text" class="form-control" id="Futura" placeholder="Solo" name="soloA" value="<?php $soloA ?>">
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="form-row ">
+                                            <div class="form-group col-md-6">
+                                                <input type="text" class="form-control" id="Atual" placeholder="Raiz" name="raizB" value="<?php $raizB ?>">
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <input type="text" class="form-control" id="Futura" placeholder="Solo" name="soloB" value="<?php $soloB ?>">
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="form-row ">
+                                            <div class="form-group col-md-6">
+                                                <input type="text" class="form-control" id="Atual" placeholder="Raiz" name="raizC" value="<?php $raizC ?>">
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <input type="text" class="form-control" id="Futura" placeholder="Solo" name="soloC" value="<?php $soloC ?>">
+                                            </div>
+                                        </div>
+                                    <td>
+                                        <div class="form-row ">
+                                            <div class="form-group col-md-6">
+                                                <input type="text" class="form-control" id="Atual" placeholder="Raiz" name="raizD" value="<?php $raizD ?>">
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <input type="text" class="form-control" id="Futura" placeholder="Solo" name="soloD"value="<?php $soloD ?>" >
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="form-row ">
+                                            <div class="form-group col-md-12">
+                                                <input type="text" class="form-control" id="Atual" placeholder="Raiz" name="ovos" value="<?php $ovos ?>">
+                                            </div>
 
-                </tr>
-               
-            </tbody>
-        </table>
+                                        </div>
+
+                                    </td>
+
+                                </tr>
+
+                            </tbody>
+                        </table>
 
                     </div>
                     <div class=" d-flex justify-content-center p-3">
