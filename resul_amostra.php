@@ -21,14 +21,14 @@
   if (!empty($codigo)) {
 
     $sql = "select proprietario.PRI_NOME,cultura.CUL_DESCRICAO,responsavel_tecnico.RES_NOME,usuario.USR_EMAIL,
-        sum(resultado_analise.RES_QTD_OVOS + resultado_analise.RES_QTD_RAIZ + resultado_analise.RES_QTD_SOLO)
-        as SOMA from amostra
-        inner join proprietario on proprietario.PRI_ID = amostra.AMO_PRI_ID
-        inner join cultura on cultura.CUL_ID = amostra.AMO_ID
-        inner join responsavel_tecnico on responsavel_tecnico.RES_TEC_ID = amostra.AMO_RES_ID
-        inner join usuario on usuario.USR_ID  = amostra.AMO_USR_ID
-        inner join resultado_analise on resultado_analise.REC_ANA_AMO_ID = amostra.AMO_ID 
-        where resultado_analise.RES_ID = ? ";
+    sum(resultado_analise.RES_QTD_OVOS + resultado_analise.RES_QTD_RAIZ + resultado_analise.RES_QTD_SOLO)
+    as SOMA from amostra
+    inner join cultura on cultura.CUL_ID = amostra.AMO_CUL_ID
+    inner join proprietario on proprietario.PRI_ID = amostra.AMO_PRI_ID
+    inner join responsavel_tecnico on responsavel_tecnico.RES_TEC_ID = amostra.AMO_RES_ID
+    inner join usuario on usuario.USR_ID  = amostra.AMO_USR_ID
+    inner join resultado_analise on resultado_analise.REC_ANA_AMO_ID = amostra.AMO_ID
+    where resultado_analise.RES_ID =  ? ";
     require_once("configuracao.php");
     $comando = mysqli_prepare($conexao, $sql);
     mysqli_stmt_bind_param($comando, "i", $codigo);
