@@ -109,7 +109,7 @@
                                         </div>
                                         <div class="form-row ">
                                             <div class="form-group col-md-12">
-                                                <input type="text" class="form-control" id="Atual" placeholder="Nematoide" name="nema" value="<?php $nema ?>" >
+                                                <input type="text" class="form-control" id="Atual" placeholder="Nem ID" name="nema" value="<?php $nema ?>" >
                                             </div>
 
                                         </div>

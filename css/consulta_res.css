@@ -1,0 +1,36 @@
+html,
+body {
+    background-image: url('../imagens/semLetras.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100%;
+    font-family: 'Numans', sans-serif;
+    background-color: lightgrey;
+}
+
+.naveg {
+    background-color: rgba(43, 197, 94, 0.767);
+    float: none;
+}
+
+.textTp {
+    font-weight: bold;
+}
+
+.divTp {
+    position: absolute;
+    left: 10%;
+    top: 15%;
+    width: 80%;
+    height: 60%;
+    background-color: rgba(18, 19, 19, 0.877)
+}
+
+.posit {
+    position: absolute;
+    top: 15%;
+}
+
+.back {
+    background-color: white;
+}

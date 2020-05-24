@@ -33,7 +33,26 @@
             }
         })
     </script>
+  <?php 
+ $conta = 552;
+ $contas= 656;
 
+ $contat = $conta + $contas;
+echo " soma $contat";
+ $contat = $conta - $contas;
+echo " menos $contat";
+ 
+
+ $contat = $conta * $contas;
+echo " vezes $contat";
+ 
+
+ $contat = $conta / $contas;
+echo "  dividido $contat";
+ 
+ 
+
+?>
 
 
     <!-- Optional JavaScript -->

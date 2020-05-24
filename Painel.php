@@ -107,7 +107,7 @@
                                     <div></div>
                                     <div></div>
                                 </div>
-                                <a href="#" class="hex-content">
+                                <a href="consulta_res.php" class="hex-content">
                                     <span class="hex-content-inner">
                                         <span class="icon">
                                             <i class="fa fa-universal-access"></i>
